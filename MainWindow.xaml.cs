@@ -142,15 +142,20 @@ namespace WpfApp13
             DoubleAnimation scaleAnimation = new DoubleAnimation(1.0,0.5,TimeSpan.FromSeconds(0.4),FillBehavior.HoldEnd);
             CircleEase circleEase = new CircleEase();
             circleEase.EasingMode = EasingMode.EaseInOut;
-            scaleAnimation.EasingFunction = circleEase;
+            GravityEase gravityEase = new GravityEase();
+           
+            scaleAnimation.EasingFunction = gravityEase;
             DoubleAnimation opacityAnimation = new DoubleAnimation(1.0, 0, TimeSpan.FromSeconds(0.4), FillBehavior.HoldEnd);
             scaleAnimation.EasingFunction = circleEase;
             //nextPage出现
-            DoubleAnimation nTranslateAnimation = new DoubleAnimation(Nav.ActualHeight, 0, TimeSpan.FromSeconds(0.7), FillBehavior.HoldEnd);
+            DoubleAnimation nTranslateAnimation = new DoubleAnimation(Nav.ActualHeight, 0, TimeSpan.FromSeconds(0.4), FillBehavior.HoldEnd);
+            nTranslateAnimation.BeginTime = TimeSpan.FromSeconds(0.15);
             nTranslateAnimation.EasingFunction = circleEase;
-            DoubleAnimation nOpacityAnimation = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.7), FillBehavior.HoldEnd);
+            DoubleAnimation nOpacityAnimation = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.4), FillBehavior.HoldEnd);
+            nOpacityAnimation.BeginTime = TimeSpan.FromSeconds(0.15);
             nOpacityAnimation.EasingFunction = circleEase;
-            DoubleAnimation nScaleAnimation = new DoubleAnimation(0.5, 1, TimeSpan.FromSeconds(0.7), FillBehavior.HoldEnd);
+            DoubleAnimation nScaleAnimation = new DoubleAnimation(0.5, 1, TimeSpan.FromSeconds(0.4), FillBehavior.HoldEnd);
+            nScaleAnimation.BeginTime = TimeSpan.FromSeconds(0.15);
             nScaleAnimation.EasingFunction = circleEase;
 
 
