@@ -78,46 +78,56 @@ namespace WpfApp13
                 return;
             }
             SwitchStatue = true;
-            //if (!(currentPage.RenderTransform is TransformGroup)|| !(nextPage.RenderTransform is TransformGroup))
+            //if ()|| )
             //{
             //currentPage transformGroup
-            TransformGroup cTransformGroup = new TransformGroup();
-            var cScaleTransform = new ScaleTransform(0, 0);
-            var cTranslateTransform = new TranslateTransform(0, 0);
-            
-            cTransformGroup.Children.Add(cScaleTransform);
-            cTransformGroup.Children.Add(cTranslateTransform);
-            Binding cBinding = new Binding("ScaleX");
-            cBinding.RelativeSource = new RelativeSource(RelativeSourceMode.Self);
-            BindingOperations.SetBinding(cScaleTransform, ScaleTransform.ScaleYProperty, cBinding);
-            
-            currentPage.RenderTransform = cTransformGroup;
+            if (!(currentPage.RenderTransform is TransformGroup))
+            {
+                TransformGroup cTransformGroup = new TransformGroup();
+                var cScaleTransform = new ScaleTransform(0, 0);
+                var cTranslateTransform = new TranslateTransform(0, 0);
+
+                cTransformGroup.Children.Add(cScaleTransform);
+                cTransformGroup.Children.Add(cTranslateTransform);
+                Binding cBinding = new Binding("ScaleX");
+                cBinding.RelativeSource = new RelativeSource(RelativeSourceMode.Self);
+                BindingOperations.SetBinding(cScaleTransform, ScaleTransform.ScaleYProperty, cBinding);
+                currentPage.RenderTransform = cTransformGroup;
+            }
+
+
+
+            if (!(nextPage.RenderTransform is TransformGroup))
+            {
+                TransformGroup nTransformGroup = new TransformGroup();
+                var nScaleTransform = new ScaleTransform(0.5, 0);
+                var nTranslateTransform = new TranslateTransform(0, 999999);
+
+                nTransformGroup.Children.Add(nScaleTransform);
+                nTransformGroup.Children.Add(nTranslateTransform);
+                Binding nBinding = new Binding("ScaleX");
+                nBinding.RelativeSource = new RelativeSource(RelativeSourceMode.Self);
+                BindingOperations.SetBinding(nScaleTransform, ScaleTransform.ScaleYProperty, nBinding);
+                nextPage.Opacity = 0;
+                nextPage.RenderTransform = nTransformGroup;
+            }
             currentPage.HorizontalAlignment = HorizontalAlignment.Center;
             currentPage.VerticalAlignment = VerticalAlignment.Center;
             currentPage.RenderTransformOrigin = new Point(0.5, 0.5);
             //nextPage transformGroup
-            TransformGroup nTransformGroup = new TransformGroup();
-            var nScaleTransform = new ScaleTransform(0.5, 0);
-            var nTranslateTransform = new TranslateTransform(0,999999);
-
-            nTransformGroup.Children.Add(nScaleTransform);
-            nTransformGroup.Children.Add(nTranslateTransform);
-            Binding nBinding = new Binding("ScaleX");
-            nBinding.RelativeSource = new RelativeSource(RelativeSourceMode.Self);
-            BindingOperations.SetBinding(nScaleTransform, ScaleTransform.ScaleYProperty, nBinding);
-            nextPage.Opacity = 0;
-            nextPage.RenderTransform = nTransformGroup;
+            
             nextPage.HorizontalAlignment = HorizontalAlignment.Center;
             nextPage.VerticalAlignment = VerticalAlignment.Center;
             nextPage.RenderTransformOrigin = new Point(0.5, 0.5);
             var nextHeightBinding = new Binding();
-            var nextRelativeSource = new RelativeSource(RelativeSourceMode.FindAncestor);
-            nextRelativeSource.AncestorType = typeof(Window);
-            nextHeightBinding.RelativeSource = nextRelativeSource;
+            //var nextRelativeSource = new RelativeSource(RelativeSourceMode.FindAncestor);
+            //nextRelativeSource.AncestorType = typeof(Window);
+            //nextHeightBinding.RelativeSource = nextRelativeSource;
+            nextHeightBinding.ElementName = "myWindow";
             nextHeightBinding.Path = new PropertyPath("ActualHeight");
-
             var nextWidthBinding = new Binding();
-            nextWidthBinding.RelativeSource = nextRelativeSource;
+            //nextWidthBinding.RelativeSource = nextRelativeSource;
+            nextWidthBinding.ElementName="myWindow";
             nextWidthBinding.Path = new PropertyPath("ActualWidth");
             BindingOperations.SetBinding(nextPage, FrameworkElement.HeightProperty, nextHeightBinding);
             BindingOperations.SetBinding(nextPage, FrameworkElement.WidthProperty, nextWidthBinding);
